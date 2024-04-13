@@ -1,6 +1,6 @@
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Show [P]roject [V]iew' })
+vim.keymap.set('n', '<leader>pv', ':Oil<CR>', { desc = 'Show [P]roject [V]iew' })
+vim.keymap.set('n', '<C-F12>', ':Oil<CR>')
 
-vim.keymap.set('n', '<C-{>', ':NvimTreeToggle')
 -- nnoremap('<leader>u', ':Undotreeshow<CR>')
 --
 -- vnoremap('J', ":m '>+1<CR>gv=gv")
