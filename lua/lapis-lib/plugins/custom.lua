@@ -89,4 +89,15 @@ return {
       require('oil').setup()
     end,
   },
+  -- {
+  --   'WENLIXIAO-CS/vim-matlab',
+  --   dependencies = { 'honza/vim-snippets', 'garbas/vim-snipmate', 'marcweber/vim-addon-mw-utils' },
+  -- },
+  {
+    'Civitasv/cmake-tools.nvim',
+    config = function()
+      require 'lapis-lib.configs.cmake'
+    end,
+    lazy = false,
+  },
 }

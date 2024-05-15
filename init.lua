@@ -66,7 +66,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Make Windows functional
-vim.opt.shellslash = true
+-- vim.opt.shellslash = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
