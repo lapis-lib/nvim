@@ -1,6 +1,6 @@
-require 'lapis-lib/remap'
-require 'lapis-lib/set'
-require 'lapis-lib/theme'
+require 'lapis-lib.remap'
+require 'lapis-lib.set'
+require 'lapis-lib.theme'
 
 return {
   {
@@ -99,5 +99,21 @@ return {
       require 'lapis-lib.configs.cmake'
     end,
     lazy = false,
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
+    config = function()
+      require 'lapis-lib.configs.lualine'
+    end,
+  },
+  {
+    'stevearc/overseer.nvim',
+    opts = {},
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = true,
   },
 }
