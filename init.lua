@@ -458,10 +458,18 @@ require('lazy').setup({
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-      require 'lapis-lib.configs.lspconfig'
+
+      -- require 'lapis-lib.configs.lspconfig'
 
       local servers = {
-        clangd = {},
+        clangd = {
+          on_new_config = function(new_config, new_cwd)
+            local status, cmake = pcall(require, 'cmake-tools')
+            if status then
+              cmake.clangd_on_new_config(new_config)
+            end
+          end,
+        },
         gopls = {},
         pyright = {},
         jsonls = {},
@@ -544,12 +552,12 @@ require('lazy').setup({
     lazy = false,
     keys = {
       {
-        '<leader>f',
+        '<leader>af',
         function()
           require('conform').format { async = true, lsp_fallback = true }
         end,
         mode = '',
-        desc = '[F]ormat buffer',
+        desc = '[A]uto[F]ormat buffer',
       },
     },
     opts = {
@@ -558,7 +566,8 @@ require('lazy').setup({
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
+        local disable_filetypes = { --[[ c = true, cpp = true ]]
+        }
         return {
           timeout_ms = 500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
@@ -566,6 +575,8 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        c = { 'clang-format' },
+        cpp = { 'clang-format' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --

@@ -86,7 +86,7 @@ return {
     -- Optional dependencies
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-      require('oil').setup()
+      require 'lapis-lib.configs.oil'
     end,
   },
   -- {
