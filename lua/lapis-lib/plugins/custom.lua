@@ -1,4 +1,4 @@
-require 'lapis-lib.remap'
+require 'lapis-lib.mappings'
 require 'lapis-lib.set'
 require 'lapis-lib.theme'
 
@@ -89,10 +89,10 @@ return {
       require 'lapis-lib.configs.oil'
     end,
   },
-  -- {
-  --   'WENLIXIAO-CS/vim-matlab',
-  --   dependencies = { 'honza/vim-snippets', 'garbas/vim-snipmate', 'marcweber/vim-addon-mw-utils' },
-  -- },
+  {
+    'WENLIXIAO-CS/vim-matlab',
+    -- dependencies = { 'honza/vim-snippets', 'garbas/vim-snipmate', 'marcweber/vim-addon-mw-utils' },
+  },
   {
     'Civitasv/cmake-tools.nvim',
     config = function()
@@ -115,5 +115,19 @@ return {
     'akinsho/toggleterm.nvim',
     version = '*',
     config = true,
+  },
+  {
+    'zane-/cder.nvim',
+    -- require('telescope').load_extension 'cder',
+  },
+  {
+    'windwp/nvim-autopairs',
+    dependencies = { 'hrsh7th/nvim-cmp' },
+    config = function()
+      require('nvim-autopairs').setup {}
+      local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+      local cmp = require 'cmp'
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+    end,
   },
 }

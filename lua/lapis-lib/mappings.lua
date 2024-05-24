@@ -1,5 +1,6 @@
 vim.keymap.set('n', '<leader>pv', ':Oil<CR>', { desc = 'Show [P]roject [V]iew' })
 vim.keymap.set('n', '<C-F12>', ':Oil<CR>')
+vim.keymap.set('n', '<leader>cd', ':Telescope cder<CR>', { desc = '[C]hange working [D]irectory' })
 
 -- nnoremap('<leader>u', ':Undotreeshow<CR>')
 --

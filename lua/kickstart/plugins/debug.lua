@@ -23,6 +23,7 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'mfussenegger/nvim-dap-python',
   },
   config = function()
     local dap = require 'dap'
@@ -35,13 +36,47 @@ return {
 
       -- You can provide additional configuration to the handlers,
       -- see mason-nvim-dap README for more information
-      handlers = {},
+      handlers = {
+        function(config)
+          -- all sources with no handler get passed here
+
+          -- Keep original functionality
+          require('mason-nvim-dap').default_setup(config)
+        end,
+        python = function(config)
+          config.adapters = {
+            type = 'executable',
+            command = 'N:/msys64/clang64/bin/python3',
+            args = {
+              '-m',
+              'debugpy.adapter',
+            },
+          }
+          require('mason-nvim-dap').default_setup(config) -- don't forget this!
+        end,
+        codelldb = function(config)
+          config.adapters = {
+            type = 'server',
+            port = '${port}',
+            executable = {
+              command = 'N:/msys64/home/wicked-witch/.local/share/codelldb-x86_64-windows/extension/adapter/codelldb',
+              args = {
+                '--port',
+                '${port}',
+              },
+            },
+          }
+          require('mason-nvim-dap').default_setup(config) -- don't forget this!
+        end,
+      },
 
       -- You'll need to check that you have the required things installed
       -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'debugpy',
+        'codelldb',
       },
     }
 

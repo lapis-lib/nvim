@@ -275,12 +275,16 @@ require('lazy').setup({
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          ['cder'] = {
+            require('telescope').load_extension 'cder',
+          },
         },
       }
 
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'cder')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -468,6 +472,7 @@ require('lazy').setup({
             if status then
               cmake.clangd_on_new_config(new_config)
             end
+            root_dir = root_pattern('.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', 'compile_flags.txt', 'configure.ac', '.git')
           end,
         },
         gopls = {},
@@ -680,6 +685,7 @@ require('lazy').setup({
             end
           end, { 'i', 's' }),
 
+          ['<CR>'] = cmp.mapping.confirm { select = true },
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
