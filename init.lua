@@ -472,7 +472,6 @@ require('lazy').setup({
             if status then
               cmake.clangd_on_new_config(new_config)
             end
-            root_dir = root_pattern('.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', 'compile_flags.txt', 'configure.ac', '.git')
           end,
         },
         gopls = {},
