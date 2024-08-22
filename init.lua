@@ -473,9 +473,12 @@ require('lazy').setup({
               cmake.clangd_on_new_config(new_config)
             end
           end,
+          cmd = { 'clangd', '--query-driver=N:/msys64/clang64/bin/clang++.exe' },
         },
         gopls = {},
-        pyright = {},
+        pyright = {
+          capabilities = capabilities,
+        },
         jsonls = {},
         cmake = {},
         rust_analyzer = {},
@@ -533,6 +536,11 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
         'clangd',
         'clang-format',
+        'black',
+        'mypy',
+        'ruff',
+        'pyright',
+        'debugpy',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

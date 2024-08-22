@@ -44,9 +44,12 @@ return {
           require('mason-nvim-dap').default_setup(config)
         end,
         python = function(config)
+          -- local path = require('mason-registry').get_package('debugpy'):get_install_path()
+          local path = vim.fn.getcwd()
           config.adapters = {
             type = 'executable',
-            command = 'N:/msys64/clang64/bin/python3',
+            -- command = path .. '/venv/bin/python',
+            command = 'N:/msys64/clang64/bin/python',
             args = {
               '-m',
               'debugpy.adapter',
@@ -75,7 +78,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
-        'debugpy',
+        'python',
         'codelldb',
       },
     }
@@ -116,8 +119,8 @@ return {
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+    -- dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     -- Install golang specific config
     require('dap-go').setup {
@@ -127,5 +130,14 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+
+    -- dap.configurations.python = {
+    --   {
+    --     type = 'python',
+    --     request = 'launch',
+    --     name = 'please work',
+    --     program = '${file}',
+    --   },
+    -- }
   end,
 }
