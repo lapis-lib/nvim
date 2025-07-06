@@ -43,32 +43,39 @@ return {
           -- Keep original functionality
           require('mason-nvim-dap').default_setup(config)
         end,
+        delve = function(config)
+          config.adapters = {
+            type = 'server',
+            port = '${port}',
+            executable = {
+              command = vim.fn.exepath 'dlv',
+              args = { 'dap', '-l', '127.0.0.1:${port}' },
+            },
+          }
+          require('mason-nvim-dap').default_setup(config) -- don't forget this!
+        end,
         python = function(config)
           -- local path = require('mason-registry').get_package('debugpy'):get_install_path()
           local path = vim.fn.getcwd()
           config.adapters = {
             type = 'executable',
             -- command = path .. '/venv/bin/python',
-            command = 'N:/msys64/clang64/bin/python',
-            args = {
-              '-m',
-              'debugpy.adapter',
-            },
+            command = vim.fn.exepath 'debugpy-adapter',
           }
           require('mason-nvim-dap').default_setup(config) -- don't forget this!
         end,
         codelldb = function(config)
-          config.adapters = {
+          local M = {
             type = 'server',
             port = '${port}',
             executable = {
-              command = 'N:/msys64/home/wicked-witch/.local/share/codelldb-x86_64-windows/extension/adapter/codelldb',
-              args = {
-                '--port',
-                '${port}',
-              },
+              command = vim.fn.exepath 'codellb',
+              args = { '--port', '${port}' },
             },
           }
+          if vim.fn.has 'win32' == 1 then
+            M.executable.detached = false
+          end
           require('mason-nvim-dap').default_setup(config) -- don't forget this!
         end,
       },
