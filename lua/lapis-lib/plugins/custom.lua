@@ -141,4 +141,14 @@ return {
       require('bufferline').setup {}
     end,
   },
+  {
+    'ibhagwan/smartyank.nvim',
+    config = function()
+      require('smartyank').setup {
+        clipboard = {
+          enabled = true,
+        },
+      }
+    end,
+  },
 }
