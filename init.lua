@@ -508,7 +508,8 @@ require('lazy').setup({
               cmake.clangd_on_new_config(new_config)
             end
           end,
-          cmd = { 'clangd', '--query-driver=N:/msys64/clang64/bin/clang++.exe' },
+          -- cmd = { 'clangd', '--query-driver=N:/msys64/clang64/bin/clang++.exe' },
+          cmd = { 'clangd', '--query-driver=/sbin/clang++' },
         },
         gopls = {},
         pyright = {

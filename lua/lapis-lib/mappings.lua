@@ -1,5 +1,5 @@
 vim.keymap.set('n', '<leader>pv', ':Oil<CR>', { desc = 'Show [P]roject [V]iew' })
-vim.keymap.set('n', '<C-F12>', ':Oil<CR>')
+vim.keymap.set('n', '<A-F12>', ':Oil<CR>')
 vim.keymap.set('n', '<leader>cd', ':Telescope cder<CR>', { desc = '[C]hange working [D]irectory' })
 
 -- H and L navigate beginning / end of line
@@ -11,6 +11,8 @@ vim.keymap.set('n', '<C-PageUp>', ':BufferLineCyclePrev<CR>', { silent = true })
 vim.keymap.set('n', '<C-PageDown>', ':BufferLineCycleNext<CR>', { silent = true })
 vim.keymap.set('n', '<A-[>', ':BufferLineCyclePrev<CR>', { silent = true })
 vim.keymap.set('n', '<A-]>', ':BufferLineCycleNext<CR>', { silent = true })
+-- vim.keymap.set('v', 'v', 'V', { silent = true })
+vim.keymap.set('v', '.', '$', { silent = true })
 -- nnoremap('<leader>u', ':Undotreeshow<CR>')
 --
 -- vnoremap('J', ":m '>+1<CR>gv=gv")
