@@ -24,6 +24,9 @@ return {
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
     'mfussenegger/nvim-dap-python',
+
+    -- Extra
+    'theHamsta/nvim-dap-virtual-text',
   },
   config = function()
     local dap = require 'dap'
@@ -55,12 +58,13 @@ return {
           require('mason-nvim-dap').default_setup(config) -- don't forget this!
         end,
         python = function(config)
-          -- local path = require('mason-registry').get_package('debugpy'):get_install_path()
-          local path = vim.fn.getcwd()
           config.adapters = {
             type = 'executable',
-            -- command = path .. '/venv/bin/python',
-            command = vim.fn.exepath 'debugpy-adapter',
+            command = '/usr/bin/python3',
+            args = {
+              '-m',
+              'debugpy.adapter',
+            },
           }
           require('mason-nvim-dap').default_setup(config) -- don't forget this!
         end,
@@ -92,6 +96,7 @@ return {
 
     -- Basic debugging keymaps, feel free to change to your liking!
     vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
+    vim.keymap.set('n', '<F6>', dap.close, { desc = 'Debug: Stop' })
     vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
     vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
     vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
